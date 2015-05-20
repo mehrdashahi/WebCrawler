@@ -17,7 +17,7 @@ public class SpiderTest
     public static void main(String[] args) throws FileNotFoundException, UnsupportedEncodingException
     {
         
-      Spider spider = new Spider();
+      Crawler crawler = new Crawler();
         
       String URLAddress;
       String keyWord;
@@ -30,7 +30,7 @@ public class SpiderTest
       System.out.println("Enter a keyword to search for:");
       keyWord = in.nextLine();
         
-      spider.search(URLAddress, keyWord);
+      crawler.search(URLAddress, keyWord);
       
     }
 }
