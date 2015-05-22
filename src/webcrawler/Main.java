@@ -2,7 +2,9 @@ package webcrawler;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.PrintStream;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.util.Scanner;
@@ -23,10 +25,12 @@ public class Main
         
       
       Crawler crawler = new Crawler();
-        
+       
+      
+      
       String URLAddress;
       String keyWord;
- 
+      
       Scanner in = new Scanner(System.in);
  
       System.out.println("Enter the URLAddress: ");
@@ -38,6 +42,9 @@ public class Main
       crawler.search(URLAddress, keyWord);
       
       
+      
+      
+        
               
       
     }

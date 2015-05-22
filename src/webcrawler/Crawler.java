@@ -47,7 +47,7 @@ public class Crawler
         
         
         leg.crawl(currentUrl);
-        boolean success = leg.searchForWord(searchWord);  
+        boolean success = leg.FindWord(searchWord);  
         this.pagesVisited.add(currentUrl);
         
         

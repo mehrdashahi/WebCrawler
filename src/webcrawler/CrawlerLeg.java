@@ -76,7 +76,7 @@ public class CrawlerLeg
      *            - The word or string to look for
      * @return whether or not the word was found
      */
-    public boolean searchForWord(String searchWord)
+    public boolean FindWord(String searchWord)
     {
         // Defensive coding. This method should only be used after a successful crawl.
         if(this.htmlDocument == null)
@@ -102,12 +102,12 @@ public class CrawlerLeg
     public void processDoc(Boolean success, String searchWord, String currentUrl) throws UnsupportedEncodingException, IOException { 
         
         if (success) { 
-            System.out.println("Found " + searchWord + " at " + currentUrl);
+            System.out.println("Found " + "\""+searchWord+"\"" + " at " + currentUrl);
             this.searchResult("Page" + Integer.toString(successNumber) + ".txt", searchWord, success);
         
             this.successNumber++;
         } else { 
-            System.out.println("Did not find" + searchWord + " at " + currentUrl);
+            System.out.println("Did not find " + "\""+searchWord+"\"" + " at " + currentUrl);
             this.searchResult("Page" + Integer.toString(failNumber) + ".txt", searchWord, success);
             
         }
