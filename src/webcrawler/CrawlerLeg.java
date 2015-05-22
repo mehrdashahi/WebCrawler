@@ -12,7 +12,7 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
-public class SpiderLeg
+public class CrawlerLeg
 {
     // We'll use a fake USER_AGENT so the web server thinks the robot is a normal web browser.
     private static final String USER_AGENT =
@@ -21,6 +21,7 @@ public class SpiderLeg
     private Document htmlDocument;
     private int successNumber = 1; 
     private int failNumber = 1;
+    
 
     /**
      * This performs all the work. It makes an HTTP request, checks the response, and then gathers

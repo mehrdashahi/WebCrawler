@@ -28,7 +28,7 @@ public class Crawler
   public void search(String url, String searchWord) throws FileNotFoundException, UnsupportedEncodingException, IOException
   {
       String currentUrl;
-      SpiderLeg leg = new SpiderLeg();
+      CrawlerLeg leg = new CrawlerLeg();
       int pageNumber = 1;
       currentUrl = url;
       this.pagesToVisit.add(currentUrl);
@@ -64,27 +64,16 @@ public class Crawler
             } 
         }
         continue;
+        
       }
+      }
+      
     }
   
-   /**
-   * Returns the next URL to visit (in the order that they were found). We also do a check to make
-   * sure this method doesn't return a URL that has already been visited.
-   * 
-   * @return
-   */
-  private String nextUrl()
-  {
-      String nextUrl;
-      do
-      {
-          nextUrl = this.pagesToVisit.remove();
-      } while(this.pagesVisited.contains(nextUrl)); 
-      this.pagesVisited.add(nextUrl);
-      return nextUrl;
-  }
+   
+ 
           
-      }
+      
 
   
 
