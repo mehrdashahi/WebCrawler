@@ -9,10 +9,11 @@ import java.util.Scanner;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
-public class SpiderTest
+public class Main
+
 {
     /**
-     * This is our test. It creates a spider (which creates spider legs) and crawls the web.
+     * Creates a Crawler and crawls the web. 
      * 
      * @param args
      *            - not used
@@ -20,6 +21,7 @@ public class SpiderTest
     public static void main(String[] args) throws FileNotFoundException, UnsupportedEncodingException, IOException
     {
         
+      
       Crawler crawler = new Crawler();
         
       String URLAddress;
@@ -35,12 +37,6 @@ public class SpiderTest
         
       crawler.search(URLAddress, keyWord);
       
-//      File dir = new File("C:\\Directory1");
-//      dir.mkdir();
-//      File file = new File(dir, "Sayhi.txt");
-//      PrintWriter pWriter = new PrintWriter(file); 
-//      pWriter.println("Hi");
-//      pWriter.close();
       
               
       
