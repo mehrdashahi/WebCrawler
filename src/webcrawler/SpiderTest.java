@@ -1,6 +1,9 @@
 package webcrawler;
 
+import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.util.Scanner;
 import org.jsoup.Jsoup;
@@ -14,7 +17,7 @@ public class SpiderTest
      * @param args
      *            - not used
      */
-    public static void main(String[] args) throws FileNotFoundException, UnsupportedEncodingException
+    public static void main(String[] args) throws FileNotFoundException, UnsupportedEncodingException, IOException
     {
         
       Crawler crawler = new Crawler();
@@ -31,6 +34,15 @@ public class SpiderTest
       keyWord = in.nextLine();
         
       crawler.search(URLAddress, keyWord);
+      
+//      File dir = new File("C:\\Directory1");
+//      dir.mkdir();
+//      File file = new File(dir, "Sayhi.txt");
+//      PrintWriter pWriter = new PrintWriter(file); 
+//      pWriter.println("Hi");
+//      pWriter.close();
+      
+              
       
     }
 }

@@ -1,6 +1,7 @@
 package webcrawler;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.HashSet;
 import java.util.LinkedList;
@@ -24,7 +25,7 @@ public class Crawler
    * @param searchWord
    *            - The word or string that you are searching for
    */
-  public void search(String url, String searchWord) throws FileNotFoundException, UnsupportedEncodingException
+  public void search(String url, String searchWord) throws FileNotFoundException, UnsupportedEncodingException, IOException
   {
       String currentUrl;
       SpiderLeg leg = new SpiderLeg();
@@ -33,9 +34,12 @@ public class Crawler
       this.pagesToVisit.add(currentUrl);
       //leg.crawl(currentUrl);
       this.pagesVisited.add(currentUrl);
-      int pageNum = 1; 
+      
+      //HTMLProcessor processor = new HTMLProcessor();
+      
       
       while(this.pagesVisited.size() < MAX_PAGES_TO_SEARCH & !this.pagesToVisit.isEmpty())
+          
       {
           
           
@@ -46,35 +50,21 @@ public class Crawler
         boolean success = leg.searchForWord(searchWord);  
         this.pagesVisited.add(currentUrl);
         
-        if (success)
-            {
-                System.out.println("Found " + searchWord + " at " + currentUrl);
-                leg.searchResult("Page" + Integer.toString(pageNum) + ".txt");
-                pageNum++;
-            }
-        else 
-            { 
-                System.out.println("Did not find it at" + currentUrl);
-            }
+        
+        // Search the HTML document for the keyword and save in a file if found. 
+        leg.processDoc(success, searchWord, currentUrl);
+                
         for (String link: leg.getLinks()) { 
+            
             
 
            if (!this.pagesVisited.contains(link)) { 
-                
-                 
-                    this.pagesToVisit.add(link);
-       
-                  }
-            
+               
+                this.pagesToVisit.add(link);       
+            } 
         }
         continue;
-       
-        
       }
-      
-      
-      
-
     }
   
    /**
@@ -95,7 +85,7 @@ public class Crawler
   }
           
       }
-      //System.out.println("\n**Done** Visited " + this.pagesVisited.size() + " web page(s)");
+
   
 
 

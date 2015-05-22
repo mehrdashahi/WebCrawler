@@ -17,17 +17,42 @@ import java.io.UnsupportedEncodingException;
 public class FileWriter {
     
     
+    
     private String content;
     private File fileName; 
     
-    public FileWriter(String content, String fileName) throws FileNotFoundException, UnsupportedEncodingException { 
+    
+    
+    public FileWriter(String content, String fileName, String searchWord, Boolean success) throws FileNotFoundException, UnsupportedEncodingException { 
+        
         
         this.content = content;
-        PrintWriter writer = new PrintWriter(fileName + ".txt", "UTF-8");
-        writer.println(content);
-        writer.close();
+       
+        File fDir = new File("C:\\Pages with " + searchWord);
+        File nDir = new File("C:\\Pages without " + searchWord);
+        
+        fDir.mkdir();
+        nDir.mkdir();
+        
+        if (success) { 
+            File file1 = new File(fDir, fileName + ".txt");
+
+            PrintWriter writer = new PrintWriter(file1);
+            writer.println(content);
+            writer.close();
+        } else { 
+            
+            File file2 = new File(nDir, fileName + ".txt");
+            PrintWriter writer = new PrintWriter(file2);
+            writer.println(content);
+            writer.close();
+            
+        }
+          
         
     }
+    
+    
 
  
     

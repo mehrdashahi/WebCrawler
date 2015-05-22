@@ -19,7 +19,8 @@ public class SpiderLeg
             "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/535.1 (KHTML, like Gecko) Chrome/13.0.782.112 Safari/535.1";
     private List<String> links = new LinkedList<String>();
     private Document htmlDocument;
-
+    private int successNumber = 1; 
+    private int failNumber = 1;
 
     /**
      * This performs all the work. It makes an HTTP request, checks the response, and then gathers
@@ -86,14 +87,34 @@ public class SpiderLeg
         return bodyText.toLowerCase().contains(searchWord.toLowerCase());
     }
     
-    public void searchResult(String fileName) throws FileNotFoundException, UnsupportedEncodingException { 
+   
+    public void searchResult(String fileName, String searchWord, Boolean success) throws FileNotFoundException, UnsupportedEncodingException, IOException { 
+        
         String bodyText = this.htmlDocument.body().text(); 
-        FileWriter writer = new FileWriter(bodyText, fileName);
-         
+        FileWriter writer = new FileWriter(bodyText, fileName, searchWord, success);
+        
+      
         
     }
+    
+    public void processDoc(Boolean success, String searchWord, String currentUrl) throws UnsupportedEncodingException, IOException { 
+        
+        if (success) { 
+            System.out.println("Found " + searchWord + " at " + currentUrl);
+            this.searchResult("Page" + Integer.toString(successNumber) + ".txt", searchWord, success);
+        
+            this.successNumber++;
+        } else { 
+            System.out.println("Did not find" + searchWord + " at " + currentUrl);
+            this.searchResult("Page" + Integer.toString(failNumber) + ".txt", searchWord, success);
+            
+        }
+        
+        
+    }
+    
+    
 
-    //asd 
     public List<String> getLinks()
     {
         return this.links;
