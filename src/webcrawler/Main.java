@@ -25,12 +25,8 @@ public class Main
         
       
       Crawler crawler = new Crawler();
-       
-      
-      
       String URLAddress;
       String keyWord;
-      
       Scanner in = new Scanner(System.in);
  
       System.out.println("Enter the URLAddress: ");
