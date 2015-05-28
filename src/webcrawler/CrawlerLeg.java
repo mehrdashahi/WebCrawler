@@ -11,25 +11,31 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
-
+/**
+ * Represents a crawler's main component. Responsible for making HTTP requests, 
+ * checking weather the url is HTML and retrieving the contents of the web
+ * @author mehrdad
+ */
 public class CrawlerLeg
 {
-    // Mimicing a browser's behaviour
+    /* Mimicing a browser's behaviour **/
     public static final String USER_AGENT =
             "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/535.1 (KHTML, like Gecko) Chrome/13.0.782.112 Safari/535.1";
     private List<String> links = new LinkedList<String>();
     private Document htmlDocument;
+    /* keeps the count of files storing pages that contain the search phrase **/
     private int successNumber = 1; 
+    /* keeps the count of files storing pages that do not contain the search phrase **/
     private int failNumber = 1;
     
 
     /**
-     * This performs all the work. It makes an HTTP request, checks the response, and then gathers
-     * up all the links on the page. Perform a searchForWord after the successful crawl
-     * 
+     * Returns a boolean value indicating whether or not the URL represented by
+     * "url" was successfully crawled. A successful crawl means the page was HTML 
+     * and its contents can be read by the crawler. The method also gathers up all
+     * the links from the url to be later crawled. 
      * @param url
-     *            - The URL to visit
-     * @return whether or not the crawl was successful
+     * @return 
      */
     
     public boolean crawl(String url)
@@ -60,7 +66,8 @@ public class CrawlerLeg
             }
             return true;
         }
-        catch(IOException ioe)
+        catch(IOException e)
+            // Unsuccessful 
         {
             // We were not successful in our HTTP request
             return false;
@@ -69,19 +76,19 @@ public class CrawlerLeg
 
 
     /**
-     * Performs a search on the body of on the HTML document that is retrieved. This method should
-     * only be called after a successful crawl.
+     * Searches the body of the HTML document that is retrieved. This method must
+     * only be called after a successful crawl has been performed. 
      * 
      * @param searchWord
-     *            - The word or string to look for
-     * @return whether or not the word was found
+     *            - The string to search for
+     * @return whether or not the string was found
      */
     public boolean FindWord(String searchWord)
     {
         // Defensive coding. This method should only be used after a successful crawl.
         if(this.htmlDocument == null)
         {
-            System.out.println("ERROR! Call crawl() before performing analysis on the document");
+            System.out.println("ERROR! crawl method should be called first ");
             return false;
         }
         System.out.println("Searching for the word " + searchWord + "...");
@@ -89,7 +96,15 @@ public class CrawlerLeg
         return bodyText.toLowerCase().contains(searchWord.toLowerCase());
     }
     
-   
+    /**
+     * Creates a file and stores the information of the url. 
+     * @param fileName
+     * @param searchWord
+     * @param success
+     * @throws FileNotFoundException
+     * @throws UnsupportedEncodingException
+     * @throws IOException 
+     */
     public void searchResult(String fileName, String searchWord, Boolean success) throws FileNotFoundException, UnsupportedEncodingException, IOException { 
         
         String bodyText = this.htmlDocument.body().text(); 
@@ -98,7 +113,16 @@ public class CrawlerLeg
       
         
     }
-    
+    /**
+     * Creates text files according to whether the url contains the search phrase
+     * or not. 
+     * @param success
+     * @param searchWord
+     * @param currentUrl
+     * @throws UnsupportedEncodingException
+     * @throws IOException 
+     */
+   
     public void processDoc(Boolean success, String searchWord, String currentUrl) throws UnsupportedEncodingException, IOException { 
         
         if (success) { 
@@ -115,8 +139,10 @@ public class CrawlerLeg
         
     }
     
-    
-
+    /**
+     * Returns a list containing all the links of this crawler leg.
+     * @return 
+     */
     public List<String> getLinks()
     {
         return this.links;

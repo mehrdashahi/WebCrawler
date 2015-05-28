@@ -11,18 +11,24 @@ import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 
 /**
- *
+ * Represents a file writer object responsible for handling functionality related 
+ * to files and directories.
  * @author mehrdad
  */
 public class FileWriter {
     
     
-    
+    /* the content to be written to a file, **/
     private String content;
+    /* the name of the file to be written to**/
     private File fileName; 
     
     
-    
+    /*
+    Constructs a filewriter given a filename, a search word, a success status(
+    whether or not the search phrase was found and the content of the html to be
+    written to the file.
+    */
     public FileWriter(String content, String fileName, String searchWord, Boolean success) throws FileNotFoundException, UnsupportedEncodingException { 
         
         

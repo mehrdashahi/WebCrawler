@@ -18,7 +18,7 @@ public class Main
      * Creates a Crawler and crawls the web. 
      * 
      * @param args
-     *            - not used
+     *            - none
      */
     public static void main(String[] args) throws FileNotFoundException, UnsupportedEncodingException, IOException
     {
